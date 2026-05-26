@@ -1,0 +1,68 @@
+type,section,description,"file name"
+Pre-Registration,"Study 2","AsPredicted #127197","Study 2 - AsPredicted #127197.pdf"
+Code,"Study 2","R Code","Study 2 Analysis - R code.r"
+Data,"Study 2",xlsx,S2_Data.xlsx
+Codebook,"Study 2",xlsx,S2_Data.xlsx___CODEBOOK.csv
+Code,"Study 1","R Code",S1_Cross_country_analysis.R
+Pre-Registration,"Study 3","AsPredicted #159548","Study 3 - AsPredicted #159548.pdf"
+Code,"Study 3","R Code",S3_analysis.R
+Pre-Registration,"Study 6","AsPredicted #126149","Study 6 - AsPredicted #126149.pdf"
+Code,"Study 6","R Code","S6_Analysis.(file id 45).R"
+Pre-Registration,"Study 4","AsPredicted #128442","Study 4 - AsPredicted #128442.pdf"
+Pre-Registration,"Study 6 Post Test WAC1 - Ethicality","AsPredicted #151626","Study 6 Post Test WAC1 - Ethicality - AsPredicted #151626.pdf"
+Pre-Registration,"Study 6 Post Test WAC2 - Capability","AsPredicted #150323","Study 6 Post Test WAC2 - Capability - AsPredicted #150323.pdf"
+Code,"Study 6 Post Test WAC1 - Ethicality","R Code",WAC1PT_Analysis.R
+Code,"Study 6 Post Test WAC2 - Capability","R Code",WAC2PT_Analysis.R
+Code,"Study 4","R Code","Study 4.r"
+Pre-Registration,"Study 5","AsPredicted #152863","Study 5 - AsPredicted #152863.pdf"
+Code,"Study 5","R Code","Study 5.r"
+Data,"Study 6","xlsx - task objectivity ratings",S6_Objectivity_50.xlsx
+Codebook,"Study 6","xlsx - task objectivity ratings",S6_Objectivity_50.xlsx___CODEBOOK.csv
+Data,"Study 6","This data is used in Study 6 and in its Post Test",S6_Data.xlsx.xls
+Codebook,"Study 6","This data is used in Study 6 and in its Post Test",S6_Data.xlsx.xls___CODEBOOK.csv
+Data,"Study 6 Post Test WAC1 - Ethicality",xlsx,WAC1PT_Data.xlsx
+Codebook,"Study 6 Post Test WAC1 - Ethicality",xlsx,WAC1PT_Data.xlsx___CODEBOOK.csv
+Data,"Study 6 Post Test WAC2 - Capability",xlsx,WAC2PT_Data.xlsx
+Codebook,"Study 6 Post Test WAC2 - Capability",xlsx,WAC2PT_Data.xlsx___CODEBOOK.csv
+Data,"Study 4",xlsx,"Study 4.xlsx"
+Codebook,"Study 4",xlsx,"Study 4.xlsx___CODEBOOK.csv"
+Data,"Study 5",xlsx,"Study 5.xlsx"
+Codebook,"Study 5",xlsx,"Study 5.xlsx___CODEBOOK.csv"
+Data,"Study 3",xlsx,S3_data.xlsx
+Codebook,"Study 3",xlsx,S3_data.xlsx___CODEBOOK.csv
+Pre-Registration,"Web Appendix B Supplemental Study","AsPredicted #160153","Web Appendix B Supplemental Study - AsPredicted #160153.pdf"
+Code,"Web Appendix B Supplemental Study","R Code",WB_Analysis.R
+Data,"Web Appendix B Supplemental Study",xlsx,WB_Data.xlsx
+Codebook,"Web Appendix B Supplemental Study",xlsx,WB_Data.xlsx___CODEBOOK.csv
+Pre-Registration,"Study 7","AsPredicted #190879","Study 7 - AsPredicted 190879.pdf"
+Data,"Study 1",xlsx,S1_Cross_country_dataset.xlsx
+Codebook,"Study 1",xlsx,S1_Cross_country_dataset.xlsx___CODEBOOK.csv
+Code,"Study 6 Post Test - Distinct human/shared ratings","R Code",S6PT_Analysis.R
+Data,"Study 6 Post Test - Distinct human/shared ratings",xlsx,S6PT_shared_attributes_100.xlsx
+Codebook,"Study 6 Post Test - Distinct human/shared ratings",xlsx,S6PT_shared_attributes_100.xlsx___CODEBOOK.csv
+Pre-Registration,"Study 6 Post Test - Distinct human/shared ratings","AsPredicted #183068","Study 6 Post Test - Distinct human|shared ratings - AsPredicted #183068.pdf"
+Code,"Study 7","R Code",S7_Analysis.R
+Data,"Study 7",xlsx,S7_Data.xlsx
+Codebook,"Study 7",xlsx,S7_Data.xlsx___CODEBOOK.csv
+Code,"Web Appendix A3 Factor Loading Analysis","R Code",WAA3_Analysis.R
+Data,"Web Appendix A3 Factor Loading Analysis",xlsx,WAA3_Data.xlsx
+Codebook,"Web Appendix A3 Factor Loading Analysis",xlsx,WAA3_Data.xlsx___CODEBOOK.csv
+Materials,"Studies 2,4,6, WAC1PT, WAC2PT","AI Literacy test questionnaire (25-item)","AILT_25 for researchbox.pdf"
+Materials,"Studies 3,5,7, WAB","AI Literacy test questionnaire (17-item)","AILT_17 for researchbox.pdf"
+Materials,"Study 4",qsf,"S4 - mediation.qsf"
+Materials,"Study 5",qsf,"S5 - serial mediation.qsf"
+Materials,"Study 6",qsf,"S6 - 26 tasks.qsf"
+Materials,"Study 2",qsf,"S2 - student assignments.qsf"
+Materials,"Study 3",qsf,"S3 - past usage.qsf"
+Materials,"Study 7","xlsx - survey questions on Toluna's platform","Survey questions export - Full Opinions Survey-08.01.2025.xlsx"
+Materials,"Study 6 Post Test WAC2 - Capability",qsf,WAC2.qsf
+Materials,"Web Appendix B Supplemental Study",qsf,WAB.qsf
+Materials,"Study 6 Post Test WAC1 - Ethicality",qsf,WAC1.qsf
+Materials,"Study 6 Post Test - Distinct human/shared ratings",qsf,S6PT.qsf
+
+
+"This ResearchBox is available from:"
+https://researchbox.org/1491
+
+"To directly download the entire Box as a single zipped file:"
+http://zipballs.researchbox.org/ResearchBox_1491.zip

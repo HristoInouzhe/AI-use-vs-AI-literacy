@@ -1,0 +1,32 @@
+id,varname,description
+var1,StartDate,"Start time of the survey"
+var2,EndDate,"End time of the survey"
+var3,attn8iscorrect,"The response for IMC everything that is not ""8"" is failed IMC"
+var4,tasks_1,"var 4 - var 29 the rates for the tasks: 1 = Definitely have distinctively human attributes; 7 = Definitely have attributes shared between humans and AI"
+var5,tasks_2,
+var6,tasks_3,
+var7,tasks_4,
+var8,tasks_5,
+var9,tasks_6,
+var10,tasks_7,
+var11,tasks_8,
+var12,tasks_9,
+var13,tasks_10,
+var14,tasks_11,
+var15,tasks_12,
+var16,tasks_13,
+var17,tasks_14,
+var18,tasks_15,
+var19,tasks_16,
+var20,tasks_17,
+var21,tasks_18,
+var22,tasks_19,
+var23,tasks_20,
+var24,tasks_21,
+var25,tasks_22,
+var26,tasks_23,
+var27,tasks_24,
+var28,tasks_25,
+var29,tasks_26,
+var30,Gender,"Gender:	Male  (1)  o	Female  (2)  o	Non-binary / Third gender  (3)  o	Other  (4)  o	Prefer not to say  (5) "
+var31,Age,"Age in years"

@@ -1,0 +1,74 @@
+id,varname,description
+var1,StartDate,"Start time of the survey"
+var2,EndDate,"End time of the survey"
+var3,Duration__in_seconds_,"Survey duration time"
+var4,RecordedDate,"Date of the survey"
+var5,IMC,"IMC answer field"
+var6,AI_image,"how often have you used A digital image generator (e.g., DALL-E, Midjourney,...) - measured on 5-point scales: 1= Never, 2 = Once or twice, 3 = Occasionally (more than once or twice but not more than once a month), 4 = Frequently (more than once a month), 5 = On a weekly basis. "
+var7,AI_productivity,"how often have you used An AI-powered productivity tool for note taking, scheduling, inbox management (e.g., Zapier), measured on 5-point scales: 1= Never, 2 = Once or twice, 3 = Occasionally (more than once or twice but not more than once a month), 4 = Frequently (more than once a month), 5 = On a weekly basis."
+var8,AI_website,"how often have you used An AI-powered design service to create a website (e.g., Canva) measured on 5-point scales: 1= Never, 2 = Once or twice, 3 = Occasionally (more than once or twice but not more than once a month), 4 = Frequently (more than once a month), 5 = On a weekly basis."
+var9,AI_healthapp,"how often have you used An AI-powered health app to meditate, monitor sleep (e.g., Headspace, Sleep.ai) measured on 5-point scales: 1= Never, 2 = Once or twice, 3 = Occasionally (more than once or twice but not more than once a month), 4 = Frequently (more than once a month), 5 = On a weekly basis."
+var10,AI_text,"how often have you used An AI-tool as a writing assistant (e.g., ChatGPT) measured on 5-point scales: 1= Never, 2 = Once or twice, 3 = Occasionally (more than once or twice but not more than once a month), 4 = Frequently (more than once a month), 5 = On a weekly basis."
+var11,A1,"var11 - var 27 - Literacy test question: 1 = correct, 0= incorrect"
+var12,A2,
+var13,A3,
+var14,A4,
+var15,A5,
+var16,A6,
+var17,A7,
+var18,A8,
+var19,A9,
+var20,A10,
+var21,A11,
+var22,A12,
+var23,A13,
+var24,A14,
+var25,A15,
+var26,A16,
+var27,A17,
+var28,Innovativeness_1,"I can usually figure out new hi-tech products and services without help from others - from 1 (strongly disagree) to 5 (strongly agree)"
+var29,Discomfort_1,"New technology is often too complicated to be useful - from 1 (strongly disagree) to 5 (strongly agree)"
+var30,Optimism_1,"I like the idea of doing business via computers because you are not limited to regular business hours - from 1 (strongly disagree) to 5 (strongly agree)"
+var31,Discomfort_2,"When I get technical support from a provider of a high-tech product or service, I sometimes feel as if I’m being taken advantage of by someone who knows more than I do - from 1 (strongly disagree) to 5 (strongly agree)"
+var32,Optimism_2,"Technology gives people more control over their daily lives - from 1 (strongly disagree) to 5 (strongly agree)"
+var33,Insecurity_1,"I do not consider it safe giving out credit card information over a computer - from 1 (strongly disagree) to 5 (strongly agree)"
+var34,Innovativeness_2,"In general, I am among the first in my circle of friends to acquire new technology when it appears - from 1 (strongly disagree) to 5 (strongly agree)"
+var35,Insecurity_2,"I do not feel confident doing business with a place that can only be reached online - from 1 (strongly disagree) to 5 (strongly agree)"
+var36,Optimism_3,"Technology makes me more efficient in my occupation - from 1 (strongly disagree) to 5 (strongly agree)"
+var37,Insecurity_3,"If you provide information to a machine or over the internet, you can never be sure if it really gets to the right place - from 1 (strongly disagree) to 5 (strongly agree)"
+var38,autonomy1,"I want to be free to make my own choices - from 1 (not at all) to 7 (extremely)"
+var39,autonomy2,"I want to express myself  - from 1 (not at all) to 7 (extremely)"
+var40,autonomy3,"I don’t want to be controlled  - from 1 (not at all) to 7 (extremely)"
+var41,autonomy4,"I don’t want to feel pressured  - from 1 (not at all) to 7 (extremely)"
+var42,Q81,"Var42 - var 61 - General knowledge question: 1 = correct, 0= incorrect"
+var43,Q82,
+var44,Q83,
+var45,Q84,
+var46,Q85,
+var47,Q86,
+var48,Q87,
+var49,Q88,
+var50,Q89,
+var51,Q90,
+var52,Q91,
+var53,Q92,
+var54,Q93,
+var55,Q94,
+var56,Q95,
+var57,Q96,
+var58,Q97,
+var59,Q98,
+var60,Q99,
+var61,Q100,
+var62,Gender,"gender - o	Male  (1)  o	Female  (2)  o	Non-binary / Third gender  (3)  o	Other  (4)  o	Prefer not to say  (5) "
+var63,Age,"Subject age"
+var64,Income,"Income - o	Less than $25,000  (1)  o	$25,000-$49,999  (2)  o	$50,000-$99,999  (3)  o	$100,000-$199,999  (4)  o	More than $200,000  (5) "
+var65,SC0,"Sum of the scores for the 17 item AI Literacy measure"
+var66,TRI,"The Technology Readiness Index (as measured by variables 28 - 37)"
+var67,AIScore,"Sum of the scores for the 17 item AI Literacy measure (repeat of var 65)"
+var68,GenKnow,"Sum of the scores for the general knowledge measure"
+var69,Autonomy,"autonomy measure (average of variables 38 to 41)"
+var70,Usage,"usage measure (average of variables 6 to 10)"
+var71,Gender_dummy_1,"Gender Dummy - 1-male; 0- other"
+var72,sqrtAIScore,"the square of the 17 item AI literacy score"
+var73,filter_$,"Filter dummy (0 for those who failed the IMC and should not be included and 1 for those that should be included in the analysis)"

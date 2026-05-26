@@ -1,0 +1,40 @@
+id,varname,description
+var1,StartDate,"Start time of the survey"
+var2,EndDate,"End time of the survey"
+var3,Duration__in_seconds_,"Survey duration time"
+var4,RecordedDate,"Date of the survey"
+var5,Q70,"IMC answer field"
+var6,magic," Given how amazing and magical you think it would be to have AI write a song, how likely would you be to use AI to write a song for a friend's birthday?"
+var7,A1,"var7 - var23 - Literacy test question: 1 = correct, 0= incorrect"
+var8,A2,
+var9,A3,
+var10,A4,
+var11,A5,
+var12,A6,
+var13,A7,
+var14,A8,
+var15,A9,
+var16,A10,
+var17,A11,
+var18,A12,
+var19,A13,
+var20,A14,
+var21,A15,
+var22,A16,
+var23,A17,
+var24,Q1361,"Given how capable and efficient you think it would be to have AI write a song, how likely would you be to use AI to write a song for a friend's birthday?"
+var25,Gender,"Gender Do you identify as... o	Male  (1)  o	Female  (2)  o	Non-binary / Third gender  (3)  o	Other  (4)  o	Prefer not to say  (5) "
+var26,Age,"Age How old are you (in years)?"
+var27,Income,"Income What was your total household income before taxes during the past 12 months? o	Less than $25,000  (1)  o	$25,000-$49,999  (2)  o	$50,000-$99,999  (3)  o	$100,000-$199,999  (4)  o	More than $200,000  (5) "
+var28,age.0,"Age in years"
+var29,gender.0,Gender
+var30,hhi,"household income"
+var31,ethnicity,ethnicity
+var32,hispanic,"is hispanic"
+var33,education,education
+var34,political_party,"political party"
+var35,cond,"condition (magical or capable)"
+var36,AIScore,"AI score summary"
+var37,AIScore_centered,"AI score centered"
+var38,DV,"DV (rate for magical or capable)"
+var39,filter_$,"IMC filter - 0=exclude, 1=include"
