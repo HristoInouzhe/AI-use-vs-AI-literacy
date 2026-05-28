@@ -4,7 +4,6 @@
 > Lower-Literacy/Higher-Usage Link"**
 >
 > Hristo Inouzhe  
-> Target venue: *Marketing Letters*, Replication Corner
 
 ## Repository contents
 
