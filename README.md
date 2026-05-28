@@ -3,7 +3,7 @@
 > **"AI Receptivity or AI Adoption Breadth? A Tool-Specific Reanalysis of the
 > Lower-Literacy/Higher-Usage Link"**
 >
-> Anonymous (Replication and robustness reanalysis)  
+> Hristo Inouzhe  
 > Target venue: *Marketing Letters*, Replication Corner
 
 ## Repository contents
@@ -14,14 +14,9 @@
 | `tully_ai_literacy_robustness.py` | Model library: OLS, binary logit, ordered logit, multinomial logit |
 | `reanalysis_notebook.ipynb` | Executed Jupyter notebook reproducing tables and figures |
 | `S3_data.xlsx` | Study 3 public data (also available at [ResearchBox #1491](https://researchbox.org/1491)) |
-| `references.bib` | 18 bibliographic entries with DOIs |
 | `result_table.csv` | All reported coefficients (OLS, ordered logit, binary logit) for both covariate specifications |
 | `predicted_probs.csv` | Ordered-logit predicted P(y = 1, "Never") over z = −2 to +2 for text and non-text models |
 | `descriptive_stats.csv` | Usage-frequency distributions by AI tool category |
-
-The compiled PDF, LaTeX source, figures, ResearchBox materials, and the original
-Tully et al. paper are excluded from this repository (see `.gitignore`) and kept
-only locally.
 
 ## How to re-run the analyses
 
