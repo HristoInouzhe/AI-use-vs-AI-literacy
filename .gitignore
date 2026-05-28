@@ -1,0 +1,19 @@
+# paper and figures
+paper
+figures
+
+# original data sources
+ResearchBox 1491
+
+# automatic audit
+presubmit_audit.md
+
+# original paper
+Tully-Lower Artificial Intelligence Literacy (2025).pdf
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Claude Code project settings
+.claude/
