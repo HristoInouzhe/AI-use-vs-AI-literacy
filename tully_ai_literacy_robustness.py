@@ -199,7 +199,7 @@ def build_long(
         var_name="task",
         value_name="y",
     )
-    long = long.dropna(subset=["y", literacy_col]).copy()
+    long = long.dropna(subset=["y", literacy_col, *covariates]).copy()
     long["y"] = long["y"].astype(int)
     long["z_literacy"] = zscore(long[literacy_col])
     long = long.dropna(subset=["z_literacy"]).copy()

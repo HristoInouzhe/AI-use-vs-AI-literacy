@@ -1,16 +1,14 @@
 # Fdb version 3
-["bibtex paper"] 1779825210 "paper.aux" "paper.bbl" "paper" 1779826087
+["bibtex paper"] 1779911118 "paper.aux" "paper.bbl" "paper" 1779911119
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1480098435 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "paper.aux" 1779826087 8705 6895fe36466b629d2076cc3da9a7dbe8 ""
+  "paper.aux" 1779911119 7154 b8fdafdf2e136edd35a38b894958c754 ""
   "paper.bcf" 0 -1 0 ""
   "references.bib" 1779814520 6453 29441ff301b6b79248dcecc105b50689 ""
   (generated)
   "paper.bbl"
   "paper.blg"
-["pdflatex"] 1779826086 "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.tex" "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.pdf" "paper" 1779826087
+["pdflatex"] 1779911119 "paper.tex" "paper.pdf" "paper" 1779911119
   "/etc/texmf/web2c/texmf.cnf" 1597318305 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.aux" 1779826087 8705 6895fe36466b629d2076cc3da9a7dbe8 ""
-  "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.tex" 1779826086 27613 148800bbadff61c5334efc3fad038638 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm" 1480098696 3584 929cdff2b7a8c11bd4d49fd68cb0ae70 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1480098698 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -126,17 +124,15 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1597318339 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1685955535 4138375 ef810d3bcb917ef3df0e21f1da6c982f ""
-  "figures/coefficient_comparison.pdf" 1779814520 20184 7c3eec8a601d62637d4bb5b6c1ee9472 ""
   "figures/predicted_prob_never.pdf" 1779814520 15297 963768c19aba6d676f369881d46c8591 ""
-  "figures/usage_distribution.pdf" 1779824402 20164 6c62706af91bb2f524fca1fa73166e8c ""
-  "paper.aux" 1779826087 8705 6895fe36466b629d2076cc3da9a7dbe8 ""
-  "paper.bbl" 1779825210 6340 f94100fd3abab04d8ad5bf95b4ce4cae "bibtex paper"
-  "paper.out" 1779826087 627 5b89388c3869d32be421330812b12553 ""
-  "paper.tex" 1779826086 27613 148800bbadff61c5334efc3fad038638 ""
+  "paper.aux" 1779911119 7154 b8fdafdf2e136edd35a38b894958c754 ""
+  "paper.bbl" 1779911119 6340 f94100fd3abab04d8ad5bf95b4ce4cae "bibtex paper"
+  "paper.out" 1779911119 640 64291b325866a86b600df22a7e4a28ca ""
+  "paper.tex" 1779911113 27258 4f7bb1acece9ed1197de1a3411d716f4 ""
   (generated)
-  "paper.pdf"
-  "paper.out"
-  "paper.log"
   "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.log"
+  "paper.log"
   "/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper.pdf"
+  "paper.out"
+  "paper.pdf"
   "paper.aux"

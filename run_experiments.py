@@ -22,9 +22,13 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import statsmodels.api as sm
 
 # Make the project's robustness library importable.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+PROJECT_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(PROJECT_DIR))
+import statsmodels.formula.api as smf
+
 from tully_ai_literacy_robustness import (  # noqa: E402
     build_long,
     fit_binary_logit,
@@ -34,37 +38,219 @@ from tully_ai_literacy_robustness import (  # noqa: E402
     make_exog,
     predicted_probabilities_ordered,
     read_table,
+    zscore,
 )
 from statsmodels.miscmodels.ordinal_model import OrderedModel  # noqa: E402
 
-DATA_PATH = Path(__file__).resolve().parent.parent / "S3_data.xlsx"
-FIG_DIR = Path(__file__).resolve().parent / "figures"
+DATA_PATH = PROJECT_DIR / "S3_data.xlsx"
+FIG_DIR = PROJECT_DIR / "figures"
 FIG_DIR.mkdir(exist_ok=True)
 
 LITERACY = "SC0"
-COVARS = ["Age", "Income", "GenKnow", "Autonomy", "Gender"]
+DEMOGRAPHIC_COVARS = ["Age", "Income", "GenKnow", "Autonomy", "Gender_dummy_1"]
+TABLE4_COVARS = ["TRI", "GenKnow", "Autonomy", "Gender_dummy_1"]
+COVARS = DEMOGRAPHIC_COVARS
 NONTEXT = ["AI_image", "AI_productivity", "AI_website", "AI_healthapp"]
 ALL5 = NONTEXT + ["AI_text"]
 
 
-def run_block(name: str, outcome_cols: list[str], threshold: float | None = None) -> None:
+def filtered_data(df: pd.DataFrame, covariates: list[str]) -> pd.DataFrame:
+    """Use the original Study 3 inclusion flag and complete controls."""
+    dat = df[df["filter_$"] == 1].copy()
+    return dat.dropna(subset=covariates)
+
+
+def run_block(
+    name: str,
+    outcome_cols: list[str],
+    threshold: float | None = None,
+    covariates: list[str] | None = None,
+) -> None:
+    covariates = covariates or COVARS
     print("\n" + "#" * 88)
     print(f"BLOCK: {name}")
     print("#" * 88)
-    df = read_table(DATA_PATH)
-    long = build_long(df, LITERACY, outcome_cols, id_col=None, covariates=COVARS)
+    df = filtered_data(read_table(DATA_PATH), covariates)
+    long = build_long(df, LITERACY, outcome_cols, id_col=None, covariates=covariates)
     id_col = "__row_id__"
     print(f"N participants: {long[id_col].nunique()} | N item-level rows: {len(long)}")
-    fit_ols_average(long, id_col=id_col, literacy_col=LITERACY, covariates=COVARS)
-    fit_binary_logit(long, covariates=COVARS, threshold=threshold)
-    fit_ordered_logit(long, covariates=COVARS)
-    fit_multinomial_logit(long, covariates=COVARS)
-    predicted_probabilities_ordered(long, covariates=COVARS)
+    fit_ols_average(long, id_col=id_col, literacy_col=LITERACY, covariates=covariates)
+    fit_binary_logit(long, covariates=covariates, threshold=threshold)
+    fit_ordered_logit(long, covariates=covariates)
+    fit_multinomial_logit(long, covariates=covariates)
+    predicted_probabilities_ordered(long, covariates=covariates)
+
+
+def effect_rows(
+    df: pd.DataFrame,
+    spec: str,
+    covariates: list[str],
+    group_label: str,
+    outcome_cols: list[str],
+) -> list[dict[str, float | str | int]]:
+    """Return the AI-literacy coefficient for compact result tables."""
+    long = build_long(
+        filtered_data(df, covariates),
+        LITERACY,
+        outcome_cols,
+        id_col=None,
+        covariates=covariates,
+    )
+    rows: list[dict[str, float | str | int]] = []
+
+    # OLS on participant-level average (matches original Study 3 specification).
+    wide_avg = (
+        long.groupby("__row_id__")
+        .agg(y_avg=("y", "mean"), literacy=(LITERACY, "first"),
+             **{c: (c, "first") for c in covariates})
+        .reset_index()
+    )
+    wide_avg["z_literacy"] = zscore(wide_avg["literacy"])
+    rhs_parts = ["z_literacy"]
+    for c in covariates:
+        if pd.api.types.is_numeric_dtype(wide_avg[c]):
+            wide_avg[f"z_{c}"] = zscore(wide_avg[c])
+            rhs_parts.append(f"z_{c}")
+        else:
+            rhs_parts.append(f"C({c})")
+    ols_res = smf.ols("y_avg ~ " + " + ".join(rhs_parts), data=wide_avg).fit(cov_type="HC3")
+    rows.append({
+        "spec": spec,
+        "group": group_label,
+        "model": "OLS",
+        "n_participants": len(wide_avg),
+        "n_rows": len(wide_avg),
+        "beta": float(ols_res.params["z_literacy"]),
+        "se": float(ols_res.bse["z_literacy"]),
+        "p": float(ols_res.pvalues["z_literacy"]),
+        "or": np.nan,
+    })
+
+    exog = make_exog(long, covariates=covariates, task_fe=True)
+    ordered = OrderedModel(long["y"].astype(int), exog, distr="logit").fit(
+        method="bfgs", maxiter=1000, disp=False
+    )
+    rows.append({
+        "spec": spec,
+        "group": group_label,
+        "model": "Ordered logit",
+        "n_participants": long["__row_id__"].nunique(),
+        "n_rows": len(long),
+        "beta": float(ordered.params["z_literacy"]),
+        "se": float(ordered.bse["z_literacy"]),
+        "p": float(ordered.pvalues["z_literacy"]),
+        "or": np.nan,
+    })
+
+    for threshold, model_label in [(3, "Binary logit (Y > 3)"), (1, "Binary adoption (Y > 1)")]:
+        dat = long.copy()
+        dat["y_bin"] = (dat["y"] > threshold).astype(int)
+        exog_bin = sm.add_constant(make_exog(dat, covariates=covariates, task_fe=True), has_constant="add")
+        binary = sm.GLM(dat["y_bin"], exog_bin, family=sm.families.Binomial()).fit(cov_type="HC3")
+        rows.append({
+            "spec": spec,
+            "group": group_label,
+            "model": model_label,
+            "n_participants": long["__row_id__"].nunique(),
+            "n_rows": len(long),
+            "beta": float(binary.params["z_literacy"]),
+            "se": float(binary.bse["z_literacy"]),
+            "p": float(binary.pvalues["z_literacy"]),
+            "or": float(np.exp(binary.params["z_literacy"])),
+        })
+
+    return rows
+
+
+def save_predicted_probs() -> None:
+    """Compute and save ordered-logit predicted P(y=1, Never) over a literacy grid.
+
+    Covers the two models cited in the paper text (lines 317-322):
+      - Text AI only (demographic-adjusted)
+      - Non-text AI (demographic-adjusted)
+    Grid: z_literacy from -2 to +2 in 0.25 steps.
+    Covariates held at zero (i.e., at their sample means after z-scoring).
+    """
+    df = filtered_data(read_table(DATA_PATH), COVARS)
+    grid = np.arange(-2.0, 2.01, 0.25)
+    all_rows = []
+
+    for label, cols in [("Text only", ["AI_text"]), ("Non-text only", NONTEXT)]:
+        long = build_long(df, LITERACY, cols, id_col=None, covariates=COVARS)
+        exog = make_exog(long, covariates=COVARS, task_fe=True)
+        y = long["y"].astype(int)
+        res = OrderedModel(y, exog, distr="logit").fit(method="bfgs", maxiter=1000, disp=False)
+        base = pd.DataFrame(np.zeros((len(grid), exog.shape[1])), columns=exog.columns)
+        base["z_literacy"] = grid
+        pred = res.model.predict(res.params, exog=base)
+        cats = sorted(y.unique())
+        for i, z in enumerate(grid):
+            row = {"group": label, "z_literacy": round(float(z), 2)}
+            for j, cat in enumerate(cats):
+                row[f"P(y={cat})"] = float(pred[i, j])
+            all_rows.append(row)
+
+    pred_df = pd.DataFrame(all_rows)
+    out = PROJECT_DIR / "predicted_probs.csv"
+    pred_df.to_csv(out, index=False)
+    print(f"Saved predicted probabilities to {out}")
+
+    # Print the paper-cited anchor values (z = -2 and z = +2).
+    print("\nPaper-cited predicted P(y=1, Never) anchor values:")
+    for label in ["Text only", "Non-text only"]:
+        sub = pred_df[pred_df["group"] == label]
+        p_lo = sub.loc[sub["z_literacy"] == -2.0, "P(y=1)"].values[0]
+        p_hi = sub.loc[sub["z_literacy"] == 2.0, "P(y=1)"].values[0]
+        print(f"  {label}: z=-2 → {p_lo:.3f}, z=+2 → {p_hi:.3f}")
+
+
+def save_descriptive_stats() -> None:
+    """Compute and save usage-distribution descriptive stats cited in paper text."""
+    df = filtered_data(read_table(DATA_PATH), COVARS)
+    rows = []
+    for col in ALL5:
+        counts = df[col].dropna().astype(int).value_counts().sort_index()
+        total = counts.sum()
+        for cat, cnt in counts.items():
+            rows.append({"tool": col, "category": int(cat), "count": int(cnt),
+                         "share": float(cnt / total)})
+    desc_df = pd.DataFrame(rows)
+    out = PROJECT_DIR / "descriptive_stats.csv"
+    desc_df.to_csv(out, index=False)
+    print(f"Saved descriptive statistics to {out}")
+
+    # Print the paper-cited summary values.
+    print("\nPaper-cited descriptive values:")
+    text_used = (df["AI_text"] > 1).sum()
+    print(f"  Text AI used at least occasionally (Y>1): {text_used}/{len(df)} = {text_used/len(df):.1%}")
+    for col in NONTEXT:
+        never = (df[col] == 1).sum()
+        print(f"  {col} Never (Y=1): {never}/{len(df)} = {never/len(df):.1%}")
+
+
+def write_result_tables() -> None:
+    """Write primary and original-Table-4 robustness coefficient tables."""
+    df = read_table(DATA_PATH)
+    groups = [
+        ("Pooled (5 tools)", ALL5),
+        ("Text only", ["AI_text"]),
+        ("Non-text only", NONTEXT),
+    ]
+    rows = []
+    for spec, covariates in [
+        ("Demographic-adjusted", DEMOGRAPHIC_COVARS),
+        ("Original Table 4 covariates", TABLE4_COVARS),
+    ]:
+        for group_label, cols in groups:
+            rows.extend(effect_rows(df, spec, covariates, group_label, cols))
+    result_df = pd.DataFrame(rows)
+    result_df.to_csv(PROJECT_DIR / "result_table.csv", index=False)
+    print(result_df.round({"beta": 3, "se": 3, "p": 4, "or": 3}).to_string(index=False))
 
 
 def make_predicted_probability_figure() -> None:
     """Figure 1: P(y=1) over literacy grid for text vs non-text."""
-    df = read_table(DATA_PATH)
+    df = filtered_data(read_table(DATA_PATH), COVARS)
     grid = np.linspace(-2.0, 2.0, 17)
     fig, ax = plt.subplots(figsize=(6.2, 4.2))
 
@@ -98,7 +284,7 @@ def make_predicted_probability_figure() -> None:
 
 def make_coefficient_comparison_figure() -> None:
     """Figure 2: AI-literacy coefficient across tool groupings and model families."""
-    df = read_table(DATA_PATH)
+    df = filtered_data(read_table(DATA_PATH), COVARS)
 
     rows = []
     for group_label, cols in [
@@ -117,7 +303,6 @@ def make_coefficient_comparison_figure() -> None:
         rows.append({"group": group_label, "model": "Ordered logit", "beta": beta, "se": se})
 
         # Binary logit at midpoint (y>3) on item-level data
-        import statsmodels.api as sm
         threshold = (long["y"].min() + long["y"].max()) / 2
         dat = long.copy()
         dat["y_bin"] = (dat["y"] > threshold).astype(int)
@@ -177,7 +362,7 @@ def make_coefficient_comparison_figure() -> None:
 
 def make_usage_distribution_figure() -> None:
     """Descriptive figure: distribution of each AI tool's reported usage."""
-    df = read_table(DATA_PATH)
+    df = filtered_data(read_table(DATA_PATH), COVARS)
     labels = {
         "AI_image": "Image generators\n(e.g. DALL-E)",
         "AI_productivity": "Productivity tools\n(e.g. Zapier)",
@@ -187,11 +372,11 @@ def make_usage_distribution_figure() -> None:
     }
     fig, ax = plt.subplots(figsize=(7.5, 4.0))
     width = 0.16
-    x_cats = np.arange(1, 6)
+    x_cats = np.arange(1, 6, dtype=float)
     colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#9467bd", "#d62728"]
     for i, col in enumerate(ALL5):
         counts = df[col].dropna().astype(int).value_counts().reindex(x_cats, fill_value=0)
-        share = counts / counts.sum()
+        share = (counts / counts.sum()).to_numpy(dtype=float)
         ax.bar(x_cats + (i - 2) * width, share, width=width,
                color=colors[i], label=labels[col])
     ax.set_xticks(x_cats)
@@ -214,8 +399,23 @@ if __name__ == "__main__":
     run_block("C. Non-text AI only", NONTEXT)
     run_block("D. Non-text AI only, adoption threshold y>1", NONTEXT, threshold=1)
 
+    # Save all numerical results (including OLS) to result_table.csv.
+    print("\n--- Saving coefficient tables ---")
+    write_result_tables()
+
+    # Save predicted probabilities (paper text lines 317-322).
+    print("\n--- Saving predicted probabilities ---")
+    save_predicted_probs()
+
+    # Save descriptive statistics (two-thirds and 65-78% claims).
+    print("\n--- Saving descriptive statistics ---")
+    save_descriptive_stats()
+
     # Figures.
     print("\n--- Generating figures ---")
-    make_usage_distribution_figure()
-    make_predicted_probability_figure()
-    make_coefficient_comparison_figure()
+    try:
+        make_usage_distribution_figure()
+        make_predicted_probability_figure()
+        make_coefficient_comparison_figure()
+    except Exception as exc:
+        print(f"Figure generation skipped: {exc}")

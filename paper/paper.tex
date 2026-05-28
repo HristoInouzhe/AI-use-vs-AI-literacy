@@ -21,6 +21,7 @@
 \usepackage[round,authoryear]{natbib}
 \bibliographystyle{plainnat}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{doi: #1}}
 
 % --- Header & title --------------------------------------------------------
 \title{\vspace{-2em}AI Receptivity or AI Adoption Breadth?\\
@@ -41,17 +42,18 @@ usage of five AI tool categories on a five-point frequency scale. We first
 reproduce the negative association between AI literacy and aggregate AI usage
 using OLS on participant-level averages, binary logit, ordered logit, and
 multinomial logit specifications. We then show that the aggregate relationship
-masks substantial heterogeneity by tool type. After covariate adjustment, AI
-literacy does not significantly predict text-AI usage (ordered-logit
-$\beta = -0.097$, $p = .357$), whereas it remains a strong predictor of non-text
-AI adoption ($\beta = -0.376$, $p < .001$). Binary, ordered-logit, and
-multinomial specifications further suggest that the non-text effect is
-primarily an adoption/non-adoption pattern rather than evidence of intensive
-use: the per-standard-deviation odds ratio of ever having used a non-text
-AI tool is $0.68$. These results do not overturn the original finding, but they
-qualify its interpretation: lower AI literacy may predict broader adoption of
-certain AI-labelled tools rather than uniformly greater AI receptivity or
-text-AI use.
+masks substantial heterogeneity by tool type. In our demographic-adjusted
+primary specification, AI literacy does not significantly predict text-AI usage
+(ordered-logit $\beta = -0.090$, $p = .387$), whereas it remains a strong
+predictor of non-text AI adoption ($\beta = -0.377$, $p < .001$). The non-text
+effect is also robust under the original Study~3 Table~4 controls
+($\beta = -0.502$, $p < .001$). Binary, ordered-logit, and multinomial
+specifications suggest that the non-text relationship is primarily an
+adoption/non-adoption pattern rather than evidence of intensive use: the
+demographic-adjusted odds ratio of ever having used a non-text AI tool is
+$0.68$. These results do not overturn the original finding, but they qualify
+its interpretation: lower AI literacy may predict broader adoption of certain
+AI-labelled tools more strongly than it predicts text-AI use.
 
 \medskip
 \noindent\textbf{Keywords:} AI literacy, AI adoption, ordinal regression,
@@ -66,8 +68,9 @@ The proliferation of generative AI products has renewed marketing scholars'
 interest in the individual-level antecedents of AI adoption
 \citep{puntoni2021consumers,hermann2024aiconsumer}. Among recent contributions,
 \citet{tully2025lower} document a counterintuitive lower-literacy, higher-receptivity
-link across seven studies: consumers who score lower on objective tests of AI knowledge are, on average, more receptive
-to AI. Study~3 of that article is empirically pivotal because, unlike Studies~4
+link across seven studies: consumers who score lower on objective tests of AI
+knowledge are, on average, more receptive to AI. Study~3 is especially useful
+for reanalysis because, unlike Studies~4
 and~6, it uses reported past usage of real AI products, rather than stated
 preferences for hypothetical tasks, as the dependent variable. This makes it a
 more conservative test of the proposed relationship and, accordingly, a key
@@ -88,9 +91,10 @@ practice, and the field has accumulated substantial methodological evidence
 that doing so can distort estimates of treatment effects and even invert their
 sign \citep{liddell2018analyzing,agresti2010analysis}. Second, and more
 substantively, the five tool categories arguably tap heterogeneous behavioral
-constructs. Text AI (writing assistants) had reached mass diffusion by mid-2023
-after the release of ChatGPT, whereas image generators, productivity bots,
-website builders, and meditation apps remained niche products. Aggregating them
+constructs. Text AI (writing assistants) had become highly visible after the
+release of ChatGPT, whereas image generators, productivity bots, website
+builders, and meditation apps were plausibly less familiar products.
+Aggregating them
 into a single ``AI receptivity'' index conflates intensive text-AI use with
 broader adoption of AI-labelled consumer tools.
 
@@ -106,12 +110,11 @@ modelled as ordinal adoption data. The reanalysis makes three points:
   \item Measurement: averaging ordinal usage responses across
   heterogeneous AI categories compresses different behavioral processes into a
   single index.
-  \item Interpretation: the adjusted relationship is weak
-  and non-significant for text AI alone but strong for non-text AI tools, and
-  the non-text effect is concentrated at the adoption margin. Study~3 is
-  therefore better interpreted as evidence about non-text AI adoption
-  breadth rather than as evidence about general AI usage intensity or
-  text-AI receptivity.
+  \item Interpretation: the relationship is much stronger and more robust for
+  non-text AI tools than for text AI alone, and the non-text effect is
+  concentrated at the adoption margin. Study~3 is therefore better interpreted
+  as especially strong evidence about non-text AI adoption breadth rather than
+  as uniform evidence about general AI usage intensity.
 \end{enumerate}
 
 % ---------------------------------------------------------------------------
@@ -170,8 +173,8 @@ item-level data rather than OLS on averaged indices.
 \section{Original Study~3 and Analytic Concern}
 % ---------------------------------------------------------------------------
 
-\citet{tully2025lower} report that ``Participants with lower AI literacy were
-more receptive to have AI complete the tasks''
+\citet{tully2025lower} report that lower AI literacy was associated with
+greater frequency of AI usage
 ($B = -0.09$, $\mathrm{SE} = .02$, $t(399) = -5.73$, $p < .001$), with the
 coefficient remaining significant after controlling for technology readiness,
 general knowledge, motivation for autonomy, and gender ($B = -0.11$, $p <
@@ -180,11 +183,11 @@ $Y_{ij} \in \{1, 2, 3, 4, 5\}$ measuring usage frequency of image generators,
 productivity tools, website builders, health apps, and writing assistants.
 
 Two features of the design motivate our reanalysis. First, the five items
-correspond to qualitatively different AI products. Figure~\ref{fig:usage}
-shows their empirical distributions: text AI is used at least occasionally by
-roughly two-thirds of respondents, while the four non-text categories are
-right-censored at the lowest category (``Never''), with 65--78\% of
-respondents reporting no usage in the previous six months. Second, the
+correspond to qualitatively different AI products. Their empirical
+distributions differ sharply: text AI is used at least occasionally by roughly
+two-thirds of respondents, while the four non-text categories are heavily
+concentrated at the lowest category (``Never''), with 65--78\% of respondents
+reporting no usage in the previous six months. Second, the
 outcome
 \[
 Y_{ij} \in \{1, 2, 3, 4, 5\}
@@ -196,17 +199,6 @@ Averaging is not inherently invalid, but it conflates two distinct margins:
 those margins differ across tools, the pooled effect estimate need not have a
 clean substantive interpretation.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.92\linewidth]{figures/usage_distribution.pdf}
-  \caption{Reported usage frequency by AI tool category (Study~3,
-    N$=$401). Text AI is the only category for which a clear majority of
-    respondents are users; the four non-text categories are right-skewed
-    with most respondents at category 1 (\emph{Never used in the last
-    six months}).}
-  \label{fig:usage}
-\end{figure}
-
 % ---------------------------------------------------------------------------
 \section{Reanalysis Strategy}
 % ---------------------------------------------------------------------------
@@ -214,10 +206,16 @@ clean substantive interpretation.
 We download the public Study~3 data from
 \href{https://researchbox.org/1491}{ResearchBox \#1491} and use the AI
 literacy score (\texttt{SC0}, summed correct answers on the 17-item
-AI-constructed measure), the five usage items, and the same covariates
-reported in the original Table~4 (age, income, general knowledge, motivation
-for autonomy, gender). We standardize the AI literacy score (and continuous
-covariates) so that coefficients are interpretable as the effect of a
+AI-constructed measure) and the five usage items. Our primary specification is
+demographic-adjusted: age, income, general knowledge, motivation for autonomy,
+and a male-gender indicator. We use this specification because it retains the
+full Study~3 analytic sample (N$=$401) while adjusting for demographics and the
+two non-technology individual-difference covariates emphasized in the original
+paper. As a robustness check, we re-estimate the key models using the original
+Table~4 control set: technology readiness, general knowledge, motivation for
+autonomy, and a male-gender indicator (N$=$379 because technology readiness has
+missing observations). We standardize the AI literacy score and continuous
+covariates so that coefficients are interpretable as the effect of a
 one-standard-deviation increase. We then fit four model families across three
 outcome groupings.
 
@@ -249,8 +247,8 @@ outcome groupings.
 \paragraph{Implementation.} All models are fit in Python with
 \texttt{statsmodels}. OLS and binary-logit standard errors are
 heteroskedasticity-robust (\texttt{HC3}). Item-level models include
-task fixed effects. Full code and a Jupyter notebook reproducing every number
-and figure in the paper are provided as supplementary material.
+task fixed effects. Full code, a Jupyter notebook, and pre-generated figures
+are provided as supplementary material.
 
 % ---------------------------------------------------------------------------
 \section{Results}
@@ -258,73 +256,51 @@ and figure in the paper are provided as supplementary material.
 
 \subsection{Replication of the pooled effect}
 
-Table~\ref{tab:pooled} reports the AI-literacy coefficient under each of the
-four model families on the pooled five-tool outcome. The estimated effect of a
-one-standard-deviation increase in AI literacy is negative and statistically
-significant in every specification. The OLS estimate
-($\hat\beta = -0.179$, $p = .001$) recovers, after standardization, the result
-reported in the original paper. The ordered logit ($\hat\beta = -0.306$,
-$p < .001$) and binary logit at the scale midpoint
-($\hat\beta = -0.328$, $p < .001$, odds ratio $= 0.72$) tell the same
-qualitative story. The multinomial logit (omitted from the table for
-compactness) yields the same direction across all four non-reference
-categories. We conclude, as the original authors did, that the pooled
-association is robust to model choice.
-
-\begin{table}[t]
-  \centering
-  \caption{Pooled five-tool replication of Study~3. Coefficient on a
-    +1 standard-deviation increase in AI literacy, controlling for age,
-    income, general knowledge, motivation for autonomy, and gender. Item-level
-    models include task fixed effects.
-    N participants $= 401$; N item-level observations $= 2{,}005$.}
-  \label{tab:pooled}
-  \begin{tabular}{lrrrl}
-    \toprule
-    \textbf{Model} & \textbf{Coef.} & \textbf{SE} & \textbf{$p$-value} & \textbf{Notes} \\
-    \midrule
-    OLS on participant average           & $-0.179$ & $0.053$ & $.001$    & HC3 SE   \\
-    Binary logit, item-level $(Y > 3)$   & $-0.328$ & $0.086$ & $< .001$  & OR $= 0.72$ \\
-    Ordered logit, item-level            & $-0.306$ & $0.054$ & $< .001$  & Prop.\ odds \\
-    Multinomial logit, item-level        & $-0.189$ to $-0.452$ & NA & $< .05$ all & vs.\ $y=1$ \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+The demographic-adjusted pooled five-tool association is negative and
+statistically significant in every specification. OLS on the participant-level
+average gives $\hat\beta = -0.181$ ($p = .001$), after standardization. The
+ordered logit gives $\hat\beta = -0.307$ ($p < .001$), the binary logit at the
+scale midpoint gives $\hat\beta = -0.320$ ($p < .001$, odds ratio $=0.73$), and
+the binary adoption logit gives $\hat\beta = -0.330$ ($p < .001$, odds ratio
+$=0.72$). The multinomial logit yields the same negative direction across all
+four non-reference categories. We therefore reproduce the original pooled
+lower-literacy/higher-usage association before decomposing it by tool type.
 
 \subsection{Text vs.\ non-text decomposition}
 
 Table~\ref{tab:decomposition} re-estimates the ordered-logit and binary-logit
 specifications separately on the text-AI outcome and on the four non-text
-outcomes. The contrast is clear. For text AI alone, the ordered-logit
-coefficient is small and not significantly different from zero
-($\hat\beta = -0.097$, $\mathrm{SE} = 0.105$, $p = .357$); the binary
+outcomes. The demographic-adjusted contrast is clear. For text AI alone, the
+ordered-logit coefficient is small and not significantly different from zero
+($\hat\beta = -0.090$, $\mathrm{SE} = 0.104$, $p = .387$); the binary
 ``frequent use'' logit and the binary adoption logit are also non-significant.
-For non-text AI, the same coefficient is roughly four times larger in
-magnitude and highly significant ($\hat\beta = -0.376$,
+For non-text AI, the ordered-logit coefficient is roughly four times larger in
+magnitude and highly significant ($\hat\beta = -0.377$,
 $\mathrm{SE} = 0.063$, $p < .001$), and the result is consistent across the
 ordered, midpoint-binary, and adoption-binary specifications.
 
 \begin{table}[t]
   \centering
-  \caption{Text vs.\ non-text decomposition. Coefficient on a +1
-    standard-deviation increase in AI literacy, with the same covariates as
-    Table~\ref{tab:pooled}. Item-level models include task fixed effects.}
+  \caption{Demographic-adjusted text vs.\ non-text decomposition. Coefficient
+    on a +1 standard-deviation increase in AI literacy, controlling for age,
+    income, general knowledge, motivation for autonomy, and male gender.
+    Item-level models include task fixed effects.}
   \label{tab:decomposition}
   \begin{tabular}{lrrrl}
     \toprule
     \textbf{Outcome / Model} & \textbf{Coef.} & \textbf{SE} & \textbf{$p$} & \textbf{Notes} \\
     \midrule
     \multicolumn{5}{l}{Text AI only (N$=$401)} \\
-    \quad OLS                              & $-0.075$ & $0.081$ & $.353$ & HC3 SE       \\
-    \quad Binary logit ($Y > 3$)           & $-0.112$ & $0.142$ & $.433$ & OR $= 0.89$ \\
-    \quad Binary adoption ($Y > 1$)        & $-0.060$ & $0.131$ & $.648$ & OR $= 0.94$ \\
-    \quad Ordered logit                    & $-0.097$ & $0.105$ & $.357$ & Prop.\ odds \\
+    \quad OLS                              & $-0.077$ & $0.082$ & $.351$ & HC3 SE       \\
+    \quad Binary logit ($Y > 3$)           & $-0.103$ & $0.141$ & $.467$ & OR $= 0.90$ \\
+    \quad Binary adoption ($Y > 1$)        & $-0.061$ & $0.128$ & $.634$ & OR $= 0.94$ \\
+    \quad Ordered logit                    & $-0.090$ & $0.104$ & $.387$ & Prop.\ odds \\
     \midrule
     \multicolumn{5}{l}{Non-text AI (4 tools; 1{,}604 item-level obs.)} \\
-    \quad OLS on participant avg.\         & $-0.204$ & $0.053$ & $< .001$ & HC3 SE      \\
-    \quad Binary logit ($Y > 3$)           & $-0.404$ & $0.104$ & $< .001$ & OR $= 0.67$ \\
-    \quad Binary adoption ($Y > 1$)        & $-0.385$ & $0.068$ & $< .001$ & OR $= 0.68$ \\
-    \quad Ordered logit                    & $-0.376$ & $0.063$ & $< .001$ & Prop.\ odds \\
+    \quad OLS on participant avg.\         & $-0.207$ & $0.054$ & $< .001$ & HC3 SE      \\
+    \quad Binary logit ($Y > 3$)           & $-0.398$ & $0.103$ & $< .001$ & OR $= 0.67$ \\
+    \quad Binary adoption ($Y > 1$)        & $-0.388$ & $0.069$ & $< .001$ & OR $= 0.68$ \\
+    \quad Ordered logit                    & $-0.377$ & $0.063$ & $< .001$ & Prop.\ odds \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -339,7 +315,7 @@ Figure~\ref{fig:predicted} visualizes the consequence of this asymmetry. We
 plot the ordered-logit-predicted probability $\Pr(Y = 1)$ (``Never used'')
 over the empirical range of standardized literacy, separately for the text
 and non-text models. For text AI, the predicted probability of non-use rises
-only modestly, from $0.27$ at $z = -2$ to $0.36$ at $z = +2$. For non-text
+only modestly, from $0.27$ at $z = -2$ to $0.35$ at $z = +2$. For non-text
 AI, it rises sharply, from $0.50$ to $0.82$ across the same range. In other
 words, the higher a respondent's AI literacy, the more likely they are to
 have never tried image generators, productivity bots, website builders, or
@@ -348,7 +324,7 @@ assistant is essentially flat.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.78\linewidth]{figures/predicted_prob_never.pdf}
+  \includegraphics[width=0.78\linewidth]{../figures/predicted_prob_never.pdf}
   \caption{Predicted probability of non-use by AI literacy. Curves
     are derived from ordered-logit fits on text-AI only (blue) and on the
     four non-text AI tools (red, with task fixed effects), holding all
@@ -358,43 +334,42 @@ assistant is essentially flat.
   \label{fig:predicted}
 \end{figure}
 
-\subsection{Coefficient summary}
+\subsection{Original Table~4 covariate check}
 
-Figure~\ref{fig:coefficient} summarizes the AI-literacy coefficient across
-all three tool groupings and the three primary model families. Three patterns
-emerge.
+Table~\ref{tab:robustness} repeats the decomposition using the original
+Study~3 Table~4 controls: technology readiness, general knowledge, motivation
+for autonomy, and male gender. Because technology readiness has missing
+observations, this specification uses N$=$379. The non-text pattern strengthens:
+the ordered-logit coefficient is $-0.502$ and the adoption odds ratio is
+$0.61$. The text-AI coefficient also becomes negative and statistically
+significant in the ordered and midpoint-binary models, although not at the
+adoption margin. We therefore avoid interpreting the text-AI result as a true
+zero. The more stable conclusion is comparative: the literacy gradient is
+larger and more consistently adoption-based for non-text AI tools.
 
-\begin{figure}[t]
+\begin{table}[t]
   \centering
-  \includegraphics[width=0.85\linewidth]{figures/coefficient_comparison.pdf}
-  \caption{AI-literacy effect by tool group and model family.
-    Markers are point estimates of the coefficient on a +1 standard-deviation
-    increase in AI literacy; horizontal bars are 95\% confidence intervals.
-    For text AI alone, the coefficient is statistically indistinguishable
-    from zero under every model family. For non-text AI, the coefficient is
-    consistently negative and significant.}
-  \label{fig:coefficient}
-\end{figure}
-
-First, all three model families agree within each tool grouping: the ordered
-logit, the midpoint binary logit, and the adoption binary logit give similar
-point estimates, and their confidence intervals overlap substantially.
-Methodological choice between metric and ordinal specifications is therefore
-not what drives our results.
-
-Second, the magnitude of the AI-literacy effect for non-text tools
-($\hat\beta \approx -0.38$) is roughly four times the magnitude for text AI
-($\hat\beta \approx -0.10$), and the latter's confidence interval crosses
-zero. The pooled coefficient ($\approx -0.31$) is an arithmetic compromise
-that obscures this asymmetry.
-
-Third, for non-text tools the adoption coefficient ($Y > 1$,
-$\hat\beta = -0.385$) is essentially identical to the midpoint coefficient
-($Y > 3$, $\hat\beta = -0.404$) and to the ordered-logit coefficient
-($\hat\beta = -0.376$). This is what we would expect if the non-text effect
-operates almost entirely at the adoption margin: shifting respondents
-into and out of the lowest category ``Never'' is enough to explain the
-ordered and midpoint estimates.
+  \caption{Robustness check using the original Study~3 Table~4 covariates.
+    Coefficient on a +1 standard-deviation increase in AI literacy, controlling
+    for technology readiness, general knowledge, motivation for autonomy, and
+    male gender. Item-level models include task fixed effects.}
+  \label{tab:robustness}
+  \begin{tabular}{lrrrl}
+    \toprule
+    \textbf{Outcome / Model} & \textbf{Coef.} & \textbf{SE} & \textbf{$p$} & \textbf{Notes} \\
+    \midrule
+    \multicolumn{5}{l}{Text AI only (N$=$379)} \\
+    \quad Binary logit ($Y > 3$)           & $-0.322$ & $0.154$ & $.037$ & OR $= 0.72$ \\
+    \quad Binary adoption ($Y > 1$)        & $-0.238$ & $0.145$ & $.100$ & OR $= 0.79$ \\
+    \quad Ordered logit                    & $-0.290$ & $0.112$ & $.010$ & Prop.\ odds \\
+    \midrule
+    \multicolumn{5}{l}{Non-text AI (4 tools; 1{,}516 item-level obs.)} \\
+    \quad Binary logit ($Y > 3$)           & $-0.577$ & $0.112$ & $< .001$ & OR $= 0.56$ \\
+    \quad Binary adoption ($Y > 1$)        & $-0.497$ & $0.075$ & $< .001$ & OR $= 0.61$ \\
+    \quad Ordered logit                    & $-0.502$ & $0.067$ & $< .001$ & Prop.\ odds \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 % ---------------------------------------------------------------------------
 \section{Discussion}
@@ -417,22 +392,24 @@ analytically distinct constructs:
     products.
 \end{enumerate}
 
-Our results suggest that Study~3 speaks most clearly to the third
-construct. The text-AI margin contributes essentially nothing to the
-aggregate effect: the slope of literacy on text-AI use is small,
-non-significant, and survives no model specification. The aggregate
-estimate is therefore mostly carrying information about adoption breadth
-across categories where the modal respondent has never used the product.
+Our results suggest that Study~3 speaks most clearly to the third construct.
+The text-AI margin is weaker and less stable than the non-text margin: it is
+small and non-significant in the full-sample demographic-adjusted specification,
+but becomes negative and statistically significant in the original Table~4
+control specification. By contrast, the non-text relationship remains large
+across specifications and appears at both the ordered-response and adoption
+margins. The aggregate estimate is therefore carrying substantial information
+about adoption breadth across categories where the modal respondent has never
+used the product.
 
 This re-interpretation does not contradict the broader theoretical claim
 that lower-literacy consumers may perceive AI as magical
 \citep{tully2025lower}. But it does change what that claim implies for
-managers. The original article's managerial recommendation is to
-``target consumers with lower AI literacy'' as a growth segment. Our
-results narrow this prescription in two ways. First, the targeting case
-is much stronger for low-penetration, non-text AI product categories
+managers. The original article suggests that firms may benefit from targeting
+lower-AI-literacy consumers. Our results narrow this prescription in two ways.
+First, the targeting case is much stronger for low-penetration, non-text AI product categories
 (image generation, productivity automation, AI design services, AI
-wellness apps) than for already-mass-market text assistants. Second, the
+wellness apps) than for more familiar text assistants. Second, the
 non-text effect is driven primarily by the adoption margin rather than
 by intensive use: low-literacy consumers are differentially more likely
 to try these products, not necessarily to use them more
@@ -479,10 +456,11 @@ Several limitations of our reanalysis warrant explicit mention.
     would be to ask whether perceived ``magicalness'' varies systematically
     across non-text and text tool categories, and whether that variation
     can account for the asymmetry we document. This would require new data.
-  \item Clustering. Our item-level standard errors do not cluster by
-    participant. We re-ran every reported model with
-    cluster-robust SE by participant; the AI-literacy coefficients and
-    significance levels are essentially unchanged.
+  \item Standard errors. OLS and binary-logit standard errors are
+    heteroskedasticity-robust, but the ordered-logit estimates use the
+    standard maximum-likelihood covariance matrix available in
+    \texttt{statsmodels}. A mixed-effects or cluster-robust ordinal model would
+    be a useful additional robustness check.
 \end{itemize}
 
 % ---------------------------------------------------------------------------
@@ -492,13 +470,13 @@ Several limitations of our reanalysis warrant explicit mention.
 We do not dispute the aggregate lower-literacy/higher-usage association
 reported by \citet{tully2025lower}; rather, we show that its substantive
 meaning changes when AI usage is decomposed by tool type and modelled as
-ordinal adoption data. The negative association replicates, but it is
-driven almost entirely by non-text AI categories and operates primarily
-at the adoption margin rather than at the intensity margin. We therefore
-read Study~3 as evidence about non-text AI adoption breadth rather
-than as evidence about general AI receptivity or text-AI use. This
-qualification preserves the spirit of the original contribution while
-sharpening its managerial and theoretical implications.
+ordinal adoption data. The negative association replicates, but it is stronger
+and more stable for non-text AI categories, where it operates primarily at the
+adoption margin rather than at the intensity margin. We therefore read Study~3
+as especially strong evidence about non-text AI adoption breadth, with weaker
+and specification-sensitive evidence about text-AI use. This qualification
+preserves the spirit of the original contribution while sharpening its
+managerial and theoretical implications.
 
 % ---------------------------------------------------------------------------
 \section*{Data and code availability}

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(conda run *)",
+      "Bash(pdflatex -interaction=nonstopmode paper.tex)",
+      "Bash(bibtex paper *)",
+      "Bash(ln -sf ../references.bib references.bib)",
+      "Bash(pdftotext \"/home/hinouzhe/pCloudDrive/Python/marketing-reanalysis/paper/paper.pdf\" -)"
+    ],
+    "additionalDirectories": [
+      "/home/hinouzhe/.claude/projects/-home-hinouzhe-pCloudDrive-Python-marketing-reanalysis"
+    ]
+  }
+}
